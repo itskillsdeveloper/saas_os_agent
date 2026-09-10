@@ -12,4 +12,10 @@ doc_events = {
 	"User": {
 		"before_insert": "saas_os_agent.enforce.enforce_user_quota",
 	},
+	# Storage is enforced on the half of it that can be: an upload is a
+	# discrete event with a known size, while database growth is a thousand
+	# small writes and cannot be refused at the byte.
+	"File": {
+		"before_insert": "saas_os_agent.enforce.enforce_storage_quota",
+	},
 }
